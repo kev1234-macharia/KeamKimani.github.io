@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Kimani Macharia | IT Support Specialist Portfolio</title>
+<style>
+  /* Root variables for colors and glowing effects */
+  :root {
+    --primary-color: #4a90e2;
+    --primary-glow: 0 0 10px #4a90e2, 0 0 20px #4a90e2, 0 0 30px #4a90e2;
+    --secondary-color: #f39c12;
+    --secondary-glow: 0 0 10px #f39c12, 0 0 20px #f39c12, 0 0 30px #f39c12;
+    --bg-dark: #121212;
+    --text-light: #e5e5e5;
+    --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  /* Reset & base */
+  * {
+    box-sizing: border-box;
+  }
+  body,html {
+    margin: 0; padding: 0;
+    font-family: var(--font-family);
+    background: var(--bg-dark);
+    color: var(--text-light);
+    scroll-behavior: smooth;
+    min-height: 100vh;
+  }
+  a {
+    color: var(--secondary-color);
+    text-decoration: none;
+  }
+  a:hover, a:focus {
+    text-decoration: underline;
+  }
+  h1,h2,h3,h4,h5 {
+    margin-top: 0;
+  }
+  section {
+    padding: 3rem 1rem 4rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  /* NAVBAR style */
+  header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    background: var(--primary-color);
+    box-shadow: var(--primary-glow);
+    z-index: 1000;
+  }
+  nav.primary-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    color: white;
+  }
+  nav.primary-nav .logo {
+    font-weight: 900;
+    font-size: 1.6rem;
+    letter-spacing: 0.05em;
+    user-select: none;
+    text-shadow: var(--primary-glow);
+  }
+  nav.primary-nav ul {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+    padding: 0;
+    margin: 0;
+  }
+  nav.primary-nav ul li {
+    position: relative;
+  }
+  nav.primary-nav ul li a {
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 0.5rem 0;
+    display: block;
+    text-shadow: var(--primary-glow);
+  }
+  nav.primary-nav ul li a.active,
+  nav.primary-nav ul li a:hover,
+  nav.primary-nav ul li a:focus {
+    color: var(--secondary-color);
+    text-shadow: var(--secondary-glow);
+  }
+
+  /* Secondary navbar */
+  nav.secondary-nav {
+    position: fixed;
+    top: 56px; /* height of first navbar */
+    left: 0; right: 0;
+    background: var(--secondary-color);
+    box-shadow: var(--secondary-glow);
+    padding: 0.5rem 1rem;
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+  }
+  nav.secondary-nav a {
+    color: var(--bg-dark);
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: var(--secondary-glow);
+  }
+  nav.secondary-nav a.active,
+  nav.secondary-nav a:hover,
+  nav.secondary-nav a:focus {
+    background: var(--bg-dark);
+    color: var(--secondary-color);
+    box-shadow: var(--primary-glow);
+    outline: none;
+  }
+
+  /* Sections container to offset fixed navbars */
+  #mainContent {
+    margin-top: 106px; /* combined navbars height */
+  }
+
+  /* Section: dashboard/home */
+  #dashboard {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: white;
+    text-align: center;
+    padding: 0 1rem;
+  }
+  #videoBG {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    object-fit: cover;
+    filter: brightness(0.4) saturate(2);
+    z-index: 0;
+    pointer-events: none;
+  }
+  #dashboard .content {
+    position: relative;
+    z-index: 1;
+    max-width: 700px;
+    margin: 0 auto;
+    padding-top: 6rem;
+  }
+  #dashboard h1 {
+    font-size: 3.5rem;
+    font-weight: 900;
+    text-shadow: var(--secondary-glow);
+  }
+  #dashboard p {
+    font-size: 1.5rem;
+    margin-top: 1rem;
+    font-weight: 600;
+    text-shadow: var(--primary-glow);
+  }
+  #dashboard .btn {
+    background: var(--secondary-color);
+    padding: 0.8rem 2rem;
+    margin-top: 2rem;
+    font-size: 1.2rem;
+    font-weight: 700;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: var(--secondary-glow);
+    color: var(--bg-dark);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  #dashboard .btn:hover,
+  #dashboard .btn:focus {
+    transform: scale(1.1);
+    box-shadow: 0 0 12px 5px var(--primary-color);
+    outline: none;
+  }
+
+  /* Gallery */
+  #gallery {
+    text-align: center;
+  }
+  #gallery h2 {
+    color: var(--secondary-color);
+    text-shadow: var(--secondary-glow);
+    margin-bottom: 2rem;
+    font-size: 2.5rem;
+  }
+  #gallery .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+  #gallery .gallery-grid img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: var(--primary-glow);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  #gallery .gallery-grid img:hover,
+  #gallery .gallery-grid img:focus {
+    transform: scale(1.1);
+    outline: none;
+  }
+
+  /* Projects */
+  #projects {
+    color: var(--text-light);
+  }
+  #projects h2 {
+    color: var(--secondary-color);
+    text-shadow: var(--secondary-glow);
+    margin-bottom: 2rem;
+    font-size: 2.5rem;
+  }
+  #projects .project-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+  }
+  #projects .project-card {
+    background: var(--bg-dark);
+    border-radius: 12px;
+    padding: 1rem;
+    width: 320px;
+    box-shadow: var(--primary-glow);
+    transition: box-shadow 0.3s ease;
+  }
+  #projects .project-card:hover {
+    box-shadow: var(--secondary-glow);
+  }
+  #projects .project-card h3 {
+    margin-top: 0;
+    color: var(--secondary-color);
+    font-weight: 700;
+  }
+  #projects .project-card p {
+    font-size: 0.95rem;
+    color: #ddd;
+  }
+  #projects .project-card img {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+  }
+
+  /* Testimonials */
+  #testimonials {
+    background: #222;
+    color: #eee;
+    text-align: center;
+    padding-bottom: 4rem;
+  }
+  #testimonials h2 {
+    color: var(--secondary-color);
+    text-shadow: var(--secondary-glow);
+    margin-bottom: 3rem;
+    font-size: 2.5rem;
+  }
+  #testimonials .testimonial-list {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 1.5rem;
+    scroll-snap-type: x mandatory;
+  }
+  #testimonials .testimonial {
+    background: var(--bg-dark);
+    box-shadow: var(--primary-glow);
+    border-radius: 12px;
+    padding: 2rem;
+    flex-shrink: 0;
+    width: 280px;
+    scroll-snap-align: center;
+  }
+  #testimonials .testimonial p {
+    font-style: italic;
+    font-size: 1rem;
+    color: #ccc;
+    margin-bottom: 1rem;
+  }
+  #testimonials .testimonial .author {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--secondary-color);
+  }
+
+  /* Partners */
+  #partners {
+    text-align: center;
+  }
+  #partners h2 {
+    color: var(--secondary-color);
+    text-shadow: var(--secondary-glow);
+    margin-bottom: 2rem;
+    font-size: 2.5rem;
+  }
+  #partners .partner-logos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+  }
+  #partners .partner-logos img {
+    max-height: 80px;
+    opacity: 0.75;
+    filter: grayscale(90%);
+    transition: filter 0.3s ease, opacity 0.3s ease;
+    cursor: pointer;
+  }
+  #partners .partner-logos img:hover,
+  #partners .partner-logos img:focus {
+    opacity: 1;
+    filter: none;
+  }
+
+  /* Social Handles */
+  #social {
+    background: #222;
+    text-align: center;
+    padding: 3rem 1rem 4rem;
+    color: #eee;
+  }
+  #social h2 {
+    color: var(--secondary-color);
+    text-shadow: var(--secondary-glow);
+    margin-bottom: 2rem;
+    font-size: 2.5rem;
+  }
+  #social .social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    font-size: 2rem;
+  }
+  #social .social-icons a {
+    color: var(--secondary-color);
+    transition: color 0.3s ease;
+  }
+  #social .social-icons a:hover,
+  #social .social-icons a:focus {
+    color: var(--primary-color);
+    outline: none;
+  }
+
+  /* About Me */
+  #about {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  #about h2 {
+    color: var(--secondary-color);
+    text-shadow: var(--secondary-glow);
+    margin-bottom: 2rem;
+    font-size: 2.5rem;
+  }
+  #about p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    font-weight: 600;
+    color: #ccc;
+  }
+
+  /* Contact Me */
+  #contact {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  #contact h2 {
+    color: var(--secondary-color);
+    text-shadow: var(--secondary-glow);
+    margin-bottom: 2rem;
+    font-size: 2.5rem;
+    text-align: center;
+  }
+  #contact form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  #contact form label {
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.9rem;
+  }
+  #contact form input, #contact form textarea {
+    background: #222;
+    border: 1px solid var(--secondary-color);
+    border-radius: 8px;
+    color: var(--text-light);
+    padding: 0.8rem 1rem;
+    font-size: 1rem;
+    resize: vertical;
+    transition: border-color 0.3s ease;
+    font-family: var(--font-family);
+  }
+  #contact form input:focus, #contact form textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: var(--primary-glow);
+  }
+  #contact form textarea {
+    min-height: 120px;
+  }
+  #contact form button {
+    background: var(--secondary-color);
+    color: var(--bg-dark);
+    font-weight: 700;
+    font-size: 1.1rem;
+    padding: 0.8rem;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: var(--secondary-glow);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    margin-top: 1rem;
+  }
+  #contact form button:hover, #contact form button:focus {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px var(--primary-color);
+    outline: none;
+  }
+  #contact .message {
+    margin-top: 1rem;
+    font-weight: 700;
+  }
+  #contact .message.success {
+    color: #27ae60;
+  }
+  #contact .message.error {
+    color: #e74c3c;
+  }
+
+  /* Pricing & Rate Card */
+  #pricing {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  #pricing h2 {
+    color: var(--secondary-color);
+    text-shadow: var(--secondary-glow);
+    margin-bottom: 2rem;
+    font-size: 2.5rem;
+  }
+  #pricing .cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+  }
+  #pricing .card {
+    background: var(--bg-dark);
+    box-shadow: var(--primary-glow);
+    border-radius: 16px;
+    padding: 2rem;
+    flex: 1 1 250px;
+    max-width: 320px;
+    color: var(--text-light);
+    transition: box-shadow 0.3s ease;
+  }
+  #pricing .card:hover {
+    box-shadow: var(--secondary-glow);
+  }
+  #pricing .card h3 {
+    color: var(--secondary-color);
+    font-weight: 700;
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+  }
+  #pricing .card .price {
+    font-size: 2.5rem;
+    font-weight: 900;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+    text-shadow: var(--primary-glow);
+  }
+  #pricing .card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.5rem 0;
+    color: #aaa;
+    font-weight: 600;
+  }
+  #pricing .card ul li {
+    margin: 0.8rem 0;
+  }
+  #pricing .card button {
+    background: var(--secondary-color);
+    border: none;
+    border-radius: 30px;
+    padding: 0.7rem 2rem;
+    font-weight: 700;
+    color: var(--bg-dark);
+    cursor: pointer;
+    box-shadow: var(--secondary-glow);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+  }
+  #pricing .card button:hover,
+  #pricing .card button:focus {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px var(--primary-color);
+    outline: none;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    nav.primary-nav ul {
+      gap: 1rem;
+    }
+    nav.secondary-nav {
+      top: 104px;
+      flex-wrap: wrap;
+      padding: 0.5rem 0.5rem;
+      gap: 0.7rem;
+    }
+    #projects .project-list,
+    #pricing .cards,
+    #gallery .gallery-grid,
+    #testimonials .testimonial-list {
+      flex-direction: column;
+      gap: 1rem;
+    }
+    #testimonials .testimonial-list {
+      overflow-x: visible;
+      scroll-snap-type: none;
+    }
+    #dashboard h1 {
+      font-size: 2.6rem;
+    }
+    #dashboard p {
+      font-size: 1.2rem;
+    }
+    #pricing .card {
+      max-width: 100%;
+    }
+  }
+
+</style>
+</head>
+<body>
+
+<header role="banner">
+  <nav class="primary-nav" role="navigation" aria-label="Primary Navigation">
+    <div class="logo" tabindex="0">Kimani Macharia</div>
+    <ul>
+      <li><a href="#dashboard" class="active">Dashboard</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#testimonials">Testimonials</a></li>
+      <li><a href="#partners">Partners</a></li>
+      <li><a href="#social">Social</a></li>
+      <li><a href="#about">About Me</a></li>
+      <li><a href="#contact">Contact Me</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+    </ul>
+  </nav>
+  <nav class="secondary-nav" role="navigation" aria-label="Secondary Navigation">
+    <a href="#dashboard" class="active">Dashboard</a>
+    <a href="#projects">Work</a>
+    <a href="#testimonials">Testimonials</a>
+    <a href="#partners">Partners</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<main id="mainContent" role="main">
+
+  <!-- Dashboard Section with video background -->
+  <section id="dashboard" tabindex="0" aria-label="Home dashboard">
+    <video id="videoBG" autoplay muted loop playsinline>
+      <source src="https://cdn.videvo.net/videvo_files/video/free/2013-07/small_watermarked/hd0169_preview.webm" type="video/webm" />
+      <source src="https://cdn.videvo.net/videvo_files/video/free/2013-07/small_watermarked/hd0169_preview.mp4" type="video/mp4" />
+      Sorry, your browser doesn't support HTML5 video.
+    </video>
+    <div class="content" role="region" aria-label="Introduction content">
+      <h1>Kimani Macharia</h1>
+      <p>IT Support Specialist | Troubleshooting | Network Administration</p>
+      <button class="btn" onclick="document.querySelector('#about').scrollIntoView({behavior:'smooth'})" aria-label="Learn more about Kimani Macharia">Learn More</button>
+    </div>
+  </section>
+
+  <!-- Gallery -->
+  <section id="gallery" aria-label="Photo gallery">
+    <h2>Gallery</h2>
+    <div class="gallery-grid" role="list">
+      <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80" alt="Workstation setup" role="listitem" tabindex="0" />
+      <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=800&q=80" alt="Networking cables close-up" role="listitem" tabindex="0" />
+      <img src="https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?auto=format&fit=crop&w=800&q=80" alt="IT Support Team discussing work" role="listitem" tabindex="0" />
+      <img src="https://images.unsplash.com/photo-1559526324-593bc073d938?auto=format&fit=crop&w=800&q=80" alt="Computer repair with tools" role="listitem" tabindex="0" />
+      <img src="https://images.unsplash.com/photo-1581093588401-012f3c4a6f4b?auto=format&fit=crop&w=800&q=80" alt="Helpdesk support phone" role="listitem" tabindex="0" />
+      <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80" alt="Server rack and cables" role="listitem" tabindex="0" />
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects" aria-label="Completed projects">
+    <h2>Work Projects Completed</h2>
+    <div class="project-list" role="list">
+      <article class="project-card" role="listitem" tabindex="0">
+        <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=600&q=80" alt="Network Setup Project" />
+        <h3>Enterprise Network Setup</h3>
+        <p>Redesigned the network infrastructure for a mid-sized company, implementing Cisco routers and switches with improved security and performance.</p>
+      </article>
+      <article class="project-card" role="listitem" tabindex="0">
+        <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=600&q=80" alt="Helpdesk Support" />
+        <h3>Helpdesk Support System</h3>
+        <p>Developed and maintained an efficient helpdesk ticketing system that reduced resolution time by 40% through process automation.</p>
+      </article>
+      <article class="project-card" role="listitem" tabindex="0">
+        <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=600&q=80" alt="Cloud Migration Project" />
+        <h3>Cloud Migration</h3>
+        <p>Led the migration of on-prem infrastructure to AWS Cloud, including virtual machines and applications, increasing scalability and reducing costs.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section id="testimonials" aria-label="Testimonials">
+    <h2>Testimonials</h2>
+    <div class="testimonial-list" role="list">
+      <blockquote class="testimonial" role="listitem" tabindex="0">
+        <p>"Kimani provided exceptional IT support during our company's digital transformation. His expertise and responsiveness are second to none."</p>
+        <cite class="author">- John Doe, CEO at Tech Solutions</cite>
+      </blockquote>
+      <blockquote class="testimonial" role="listitem" tabindex="0">
+        <p>"Thanks to Kimani's work, our network runs seamlessly with zero downtime. Highly recommended IT Specialist."</p>
+        <cite class="author">- Sarah Lee, IT Manager at FinCorp</cite>
+      </blockquote>
+      <blockquote class="testimonial" role="listitem" tabindex="0">
+        <p>"Professional, knowledgeable, and friendly! Kimani's support helped us streamline our IT operations efficiently."</p>
+        <cite class="author">- Michael Brown, COO at Innovate Inc.</cite>
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- Partners -->
+  <section id="partners" aria-label="Partners and clients">
+    <h2>Partners</h2>
+    <div class="partner-logos" role="list">
+      <img src="https://img.icons8.com/color/96/000000/microsoft.png" alt="Microsoft Logo" role="listitem" tabindex="0" />
+      <img src="https://img.icons8.com/color/96/000000/aws.png" alt="AWS Logo" role="listitem" tabindex="0" />
+      <img src="https://img.icons8.com/color/96/000000/cisco.png" alt="Cisco Logo" role="listitem" tabindex="0" />
+      <img src="https://img.icons8.com/color/96/000000/google-cloud.png" alt="Google Cloud Logo" role="listitem" tabindex="0"/>
+    </div>
+  </section>
+
+  <!-- Social Handles -->
+  <section id="social" aria-label="Social media handles">
+    <h2>Social Handles</h2>
+    <div class="social-icons" role="list">
+      <a href="https://www.linkedin.com/in/kimanimacharia" target="_blank" rel="noopener" role="listitem" aria-label="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" width="32" height="32"><path d="M4.98 3.5C4.98 4.6 4.15 5.45 3 5.45c-1.16 0-1.98-.85-1.98-1.95S1.84 2 3 2c1.15 0 1.98.85 1.98 1.5zm.02 4.5h-4v14h4v-14zM8 8h3.2v2.1h.1c.5-.9 1.7-1.9 3.6-1.9 3.9 0 4.6 2.6 4.6 6v8h-4v-7.1c0-1.7 0-4-2.5-4-2.5 0-2.8 2-2.8 3.9V22H8v-14z"/></svg></a>
+      <a href="https://twitter.com/kimanimacharia" target="_blank" rel="noopener" role="listitem" aria-label="Twitter"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" width="32" height="32"><path d="M22.46 6c-.77.35-1.6.59-2.46.69a4.3 4.3 0 001.88-2.34 8.59 8.59 0 01-2.73 1.05 4.28 4.28 0 00-7.29 3.9A12.15 12.15 0 013 5.15a4.28 4.28 0 001.32 5.72 4.2 4.2 0 01-1.94-.55v.06a4.28 4.28 0 003.43 4.2 4.3 4.3 0 01-1.93.07 4.28 4.28 0 004 3 8.6 8.6 0 01-5.33 1.84A8.74 8.74 0 012 19.54 12.14 12.14 0 008.29 21c7.55 0 11.68-6.26 11.68-11.68 0-.18 0-.35-.01-.53A8.48 8.48 0 0024 5.14a8.24 8.24 0 01-2.37.65 4.22 4.22 0 001.86-2.34"/></svg></a>
+      <a href="https://github.com/kimanimacharia" target="_blank" rel="noopener" role="listitem" aria-label="GitHub"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" width="32" height="32"><path d="M12 .3a12 12 0 00-3.79 23.4c.6.11.82-.26.82-.58v-2.1c-3.3.72-4-1.6-4-1.6a3.14 3.14 0 00-1.33-1.75c-1.08-.74.08-.73.08-.73a2.48 2.48 0 011.8 1.2 2.52 2.52 0 003.44 1 2.52 2.52 0 01.74-1.6c-2.64-.3-5.42-1.32-5.42-5.85a4.57 4.57 0 011.2-3.17 4.23 4.23 0 01.11-3.13s1-.32 3.3 1.23a11.4 11.4 0 016 0c2.32-1.56 3.32-1.23 3.32-1.23a4.23 4.23 0 01.11 3.13 4.57 4.57 0 011.2 3.16c0 4.54-2.8 5.56-5.46 5.85a2.81 2.81 0 01.81 2.17v3.22c0 .31.21.69.83.58a12 12 0 00-3.79-23.4"/></svg></a>
+    </div>
+  </section>
+
+  <!-- About Me -->
+  <section id="about" aria-label="About Me Section">
+    <h2>About Me</h2>
+    <p>Hello! I'm <strong>Kimani Macharia</strong>, an experienced IT Support Specialist with over 8 years providing expert troubleshooting, system administration, network configuration, and user support services. My passion is solving technical challenges efficiently and helping businesses harness technology to improve their operations. Certified in CompTIA A+ and Cisco CCNA, I offer dedicated support for hardware, software, networks, and cloud infrastructure. I believe in continuous learning and delivering friendly, client-focused IT support.</p>
+  </section>
+
+  <!-- Contact Me -->
+  <section id="contact" aria-label="Contact Me Section">
+    <h2>Contact Me</h2>
+    <form aria-label="Contact form">
+      <label for="contact-name">Name</label>
+      <input id="contact-name" type="text" required placeholder="Your full name" aria-required="true" />
+      <label for="contact-email">Email</label>
+      <input id="contact-email" type="email" required placeholder="you@example.com" aria-required="true" />
+      <label for="contact-message">Message</label>
+      <textarea id="contact-message" rows="5" required placeholder="Write your message here" aria-required="true"></textarea>
+      <button type="submit" aria-label="Send message">Send Message</button>
+      <p id="contact-status" role="alert" style="margin-top:0.5rem;"></p>
+    </form>
+  </section>
+
+  <!-- Pricing & Rate Card -->
+  <section id="pricing" aria-label="Pricing and Rate Card Section">
+    <h2>Pricing & Rate Card</h2>
+    <div class="cards">
+      <div class="card" tabindex="0" aria-label="Basic IT Support Package">
+        <h3>Basic Package</h3>
+        <div class="price">$50 / hour</div>
+        <ul>
+          <li>Remote troubleshooting</li>
+          <li>Software installation & updates</li>
+          <li>Setup & configuration</li>
+        </ul>
+        <button aria-label="Select Basic Package">Select Plan</button>
+      </div>
+      <div class="card" tabindex="0" aria-label="Standard IT Support Package">
+        <h3>Standard Package</h3>
+        <div class="price">$80 / hour</div>
+        <ul>
+          <li>Includes Basic Package</li>
+          <li>Network setup & maintenance</li>
+          <li>Security audits</li>
+        </ul>
+        <button aria-label="Select Standard Package">Select Plan</button>
+      </div>
+      <div class="card" tabindex="0" aria-label="Premium IT Support Package">
+        <h3>Premium Package</h3>
+        <div class="price">$120 / hour</div>
+        <ul>
+          <li>Includes Standard Package</li>
+          <li>On-site support</li>
+          <li>Cloud migration & support</li>
+        </ul>
+        <button aria-label="Select Premium Package">Select Plan</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+  // Navigation active link highlighting based on scroll position
+  const primaryLinks = document.querySelectorAll('nav.primary-nav ul li a');
+  const secondaryLinks = document.querySelectorAll('nav.secondary-nav a');
+  const sections = [...document.querySelectorAll('main > section')];
+
+  function setActiveLinks() {
+    const scrollPosition = window.scrollY + 70; // offset for fixed nav height
+    let selectedSectionId = 'dashboard';
+    for (const section of sections) {
+      if (section.offsetTop <= scrollPosition) {
+        selectedSectionId = section.id;
+      }
+    }
+    primaryLinks.forEach(link => {
+      link.classList.toggle('active', link.getAttribute('href') === '#' + selectedSectionId);
+    });
+    secondaryLinks.forEach(link => {
+      link.classList.toggle('active', link.getAttribute('href') === '#' + selectedSectionId);
+    });
+  }
+  window.addEventListener('scroll', setActiveLinks);
+  setActiveLinks();
+
+  // Simple smooth scroll for nav links
+  primaryLinks.forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(link.getAttribute('href'));
+      if (target) target.scrollIntoView({behavior:'smooth'});
+    });
+  });
+  secondaryLinks.forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(link.getAttribute('href'));
+      if (target) target.scrollIntoView({behavior:'smooth'});
+    });
+  });
+
+  // Contact form submission simulation
+  const contactForm = document.querySelector('#contact form');
+  const contactStatus = document.getElementById('contact-status');
+  contactForm.addEventListener('submit', e => {
+    e.preventDefault();
+    contactStatus.textContent = 'Sending message...';
+    // Simulate network delay
+    setTimeout(() => {
+      contactStatus.textContent = 'Thank you for your message! I will get back to you soon.';
+      contactForm.reset();
+    }, 1400);
+  });
+</script>
+
+</body>
+</html>
+
